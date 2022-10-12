@@ -3,6 +3,7 @@ package com.shootingarea.application;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
@@ -30,9 +31,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.httpBasic().and().authorizeRequests().antMatchers("/users/register")
+        http.httpBasic().and().authorizeRequests()
+                .antMatchers(HttpMethod.POST,"/users/register")
                 .permitAll()
-                .anyRequest()
+                .antMatchers(HttpMethod.GET,"/users/users")
+                .permitAll()
+                .antMatchers(HttpMethod.PUT,"/users/{name}")
+                .hasRole("USER")
+                .antMatchers(HttpMethod.DELETE,"/users/{name}")
                 .hasRole("ADMIN")
         .and().csrf().disable();
     }
