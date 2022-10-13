@@ -2,6 +2,8 @@ package com.shootingarea.application.users;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -20,27 +22,24 @@ public class UserService {
     List<User> getUsers(){
         return userRepository.findAll();
     }
-    User deleteUser(String name){
-        User user = userRepository.findByName(name)
-                .orElseThrow(()->new NoSuchElementException("user dosen't exist"));
-        userRepository.deleteByName(name);
+    User getUser(Long id){
+        User user = userRepository.findById(id).orElseThrow(()->new NoSuchElementException("usst dosn't exist"));
         return user;
     }
-    User updateUser(String name, User user) {
-        User userToUpdate = userRepository.findByName(name)
-                .orElseThrow(() -> new NoSuchElementException("user dosen't exist"));
-        if (user.getName() != null) {
-            userToUpdate.setName(user.getName());
-        }
-        if (user.getEmail() != null && !user.getEmail().equals(user.getEmail())) {
-            userRepository.findByName(user.getEmail()).ifPresent(u -> {
-                throw new IllegalArgumentException("Email alredy exist");
-            });
-        }
-        if (user.getPassword() != null) {
-            userToUpdate.setPassword(user.getPassword());
-        }
-        return userRepository.save(userToUpdate);
+    User deleteUser(Long id){
+        User user = userRepository.findById(id)
+                .orElseThrow(()->new NoSuchElementException("user dosn't exist"));
+        userRepository.deleteById(id);
+        return user;
+    }
+    User updateUser(@PathVariable Long id, @RequestBody User userToUpdate) {
+
+        return userRepository.findById(id).map(user->{
+            user.setName(userToUpdate.getName());
+            user.setEmail(userToUpdate.getEmail());
+            user.setPassword(userToUpdate.getPassword());
+            return userRepository.save(user);
+        }).orElseThrow(()->new NoSuchElementException("User isn,t exist"));
     }
 
 }
