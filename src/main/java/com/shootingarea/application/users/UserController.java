@@ -21,7 +21,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/register")
+    @PostMapping("/register")  // rejestracja urzytkowanika
     public ResponseEntity register(@RequestBody RegisterRequest registerRequest){
         userService.addUser(registerRequest);
         return new ResponseEntity(HttpStatus.OK);
@@ -43,7 +43,7 @@ public class UserController {
     User update(@PathVariable Long id,@RequestBody User user){
         return userService.updateUser(id, user);
     }
-    @PostMapping("/login")
+    @PostMapping("/login") // nie działa nie wykonuje autentyfikacji
     User login (@RequestBody User user){
        return user;
     }

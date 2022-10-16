@@ -18,7 +18,7 @@ import java.util.NoSuchElementException;
 
 @Service
 public class UserService {
-    private final UserRepository userRepository;
+    private final UserRepository userRepository;    //wstrzykiwanie repozytorium użytkownika
 
     @Autowired
     UserService(UserRepository userRepository) {
@@ -26,12 +26,12 @@ public class UserService {
 
     }
     @Autowired
-    PasswordEncoder passwordEncoder;
+    PasswordEncoder passwordEncoder;                //wstrzykiwanie enkodera haseł
    
 
 
-    User addUser(RegisterRequest registerRequest){
-        User user =  new User();
+    User addUser(RegisterRequest registerRequest){                  //tworzenie użytkownika przekazując jego parametry
+        User user =  new User();                                       // poprzez klase RegisterRequest i kodowanie hasła
         user.setName(registerRequest.getName());
         user.setPassword(encodePassword(registerRequest.getPassword()));
         user.setEmail(registerRequest.getEmail());
@@ -43,21 +43,21 @@ public class UserService {
     }
 
 
-    List<User> getUsers(){
+    List<User> getUsers(){                  //pobieranie wszystkich użytkowników
         return userRepository.findAll();
     }
-    public User getUser(Long id){
+    public User getUser(Long id){           //pobieranie użytkownika po jego id
         User user = userRepository.findById(id).orElseThrow(()->new NoSuchElementException("user isn't exist"));
         return user;
     }
-    User deleteUser(Long id){
+    User deleteUser(Long id){               // usuwanie użytkownika po id i sprawdzenie czy istnieje
         User user = userRepository.findById(id)
                 .orElseThrow(()->new NoSuchElementException("user isn't exist"));
         userRepository.deleteById(id);
         return user;
     }
     User updateUser(@PathVariable Long id, @RequestBody User userToUpdate) {
-
+        //uodate użytkownika i sprawdzenie czy ok istnieje
         return userRepository.findById(id).map(user->{
             user.setName(userToUpdate.getName());
             user.setEmail(userToUpdate.getEmail());

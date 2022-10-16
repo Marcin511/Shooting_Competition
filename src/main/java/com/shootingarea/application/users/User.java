@@ -9,7 +9,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "Users")
-public class User {
+public class User {    //tworzenie encji użytkownika
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 
@@ -17,7 +17,7 @@ public class User {
     private String name;
     private String email;
     private String password;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user") // tworzenie zależności jeden użytkownik wiele rezultatów
     private List<Result> results = new ArrayList<>();
 
     public List<Result> getResults() {

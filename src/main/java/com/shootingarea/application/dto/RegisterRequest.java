@@ -1,6 +1,6 @@
 package com.shootingarea.application.dto;
 
-public class RegisterRequest {
+public class RegisterRequest { //dane przygotowane do kodowania
     private String name;
     private String email;
     private String password;

@@ -1,6 +1,6 @@
 package com.shootingarea.application.results;
 
-import com.shootingarea.application.users.User;
+
 import com.shootingarea.application.users.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,11 +21,11 @@ public class ResultController {
         this.userService = userService;
     }
 
-    @PostMapping("/score")
+    @PostMapping("/score") // dodaje wyniki do tabeli
     public Result addResult(@RequestBody Result result){
         return resultService.addResult(result);
     }
-    @GetMapping("/result/{id}/results")
+    @GetMapping("/result/{id}/results") //pobieranie wyników po id użytkownika nie działa i nie wiem dlaczego
     public List<Result> showResults(@PathVariable Long id){
        return resultService.getResultsByUserId(id);
     }
