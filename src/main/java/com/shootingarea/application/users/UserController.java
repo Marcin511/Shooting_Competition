@@ -1,5 +1,6 @@
 package com.shootingarea.application.users;
 
+
 import com.shootingarea.application.dto.RegisterRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,5 +43,11 @@ public class UserController {
     User update(@PathVariable Long id,@RequestBody User user){
         return userService.updateUser(id, user);
     }
+    @PostMapping("/login")
+    User login (@RequestBody User user){
+       return user;
+    }
 
-}
+    }
+
+

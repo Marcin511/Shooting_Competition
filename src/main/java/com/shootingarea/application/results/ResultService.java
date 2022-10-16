@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -21,7 +22,13 @@ public class ResultService {
         return resultRepository.save(result);
     }
 
-    public List<Result> getAllResults() {
-             return resultRepository.findAll();
+    public List<Result> getResultsByUserId(Long id) {
+        List<Result> results = new ArrayList<>();
+        resultRepository.findByUserId(id).forEach(results::add);
+        return results;
          }
+
+    List<Result> getAllResults() {
+        return resultRepository.findAll();
+    }
 }

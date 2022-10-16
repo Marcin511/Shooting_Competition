@@ -1,13 +1,11 @@
 package com.shootingarea.application.results;
 
 import com.shootingarea.application.users.User;
-import org.hibernate.annotations.GenericGenerator;
-
+import com.sun.istack.NotNull;
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table
 public class Result {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,7 +15,7 @@ public class Result {
     private int userScore;
     private float accuracy;
     private String gunType;
-
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
