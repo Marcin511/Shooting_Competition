@@ -1,6 +1,9 @@
 package com.shootingarea.application.users;
 
+import com.shootingarea.application.dto.RegisterRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,21 +12,20 @@ import java.util.List;
 @CrossOrigin("http://localhost:3000")
 @RequestMapping
 public class UserController {
-
+    @Autowired
     private final UserService userService;
+
 
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
     @PostMapping("/register")
-    public User register(@RequestBody User user){
-        return userService.addUser(user);
+    public ResponseEntity register(@RequestBody RegisterRequest registerRequest){
+        userService.addUser(registerRequest);
+        return new ResponseEntity(HttpStatus.OK);
     }
-    @PostMapping("/login")
-    public User login(@RequestBody User user) {
-        return user;
-    }
+
     @GetMapping("/users")
     List<User> getAll(){
         return userService.getUsers();
