@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 
 @Service
@@ -23,9 +24,8 @@ public class ResultService {
     }
 
     public List<Result> getResultsByUserId(Long id) {
-        List<Result> results = new ArrayList<>();
-        resultRepository.findByUserId(id).forEach(results::add);
-        return results;
+
+        return (List<Result>) resultRepository.findResultByUserId(id).orElseThrow(()->new NoSuchElementException("element dont exist"));
          }
 
     List<Result> getAllResults() {

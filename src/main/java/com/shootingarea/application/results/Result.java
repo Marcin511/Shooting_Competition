@@ -2,6 +2,7 @@ package com.shootingarea.application.results;
 
 import com.shootingarea.application.users.User;
 import com.sun.istack.NotNull;
+
 import javax.persistence.*;
 import java.util.Objects;
 

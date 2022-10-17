@@ -64,7 +64,6 @@ public class User {    //tworzenie encji użytkownika
     }
 
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

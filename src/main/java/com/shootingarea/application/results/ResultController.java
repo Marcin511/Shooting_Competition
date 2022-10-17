@@ -16,21 +16,23 @@ public class ResultController {
     private final UserService userService;
 
 
-    public ResultController(ResultService resultService,UserService userService) {
+    public ResultController(ResultService resultService, UserService userService) {
         this.resultService = resultService;
         this.userService = userService;
     }
 
     @PostMapping("/score") // dodaje wyniki do tabeli
-    public Result addResult(@RequestBody Result result){
+    public Result addResult(@RequestBody Result result) {
         return resultService.addResult(result);
     }
+
     @GetMapping("/result/{id}/results") //pobieranie wyników po id użytkownika nie działa i nie wiem dlaczego
-    public List<Result> showResults(@PathVariable Long id){
-       return resultService.getResultsByUserId(id);
+    public List<Result> showResults(@PathVariable Long id) {
+        return resultService.getResultsByUserId(id);
     }
+
     @GetMapping("/showall")
-    public List<Result> showAllResults(){
+    public List<Result> showAllResults() {
         return resultService.getAllResults();
     }
 
