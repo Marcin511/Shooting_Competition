@@ -30,11 +30,7 @@ public class UserService {
    
 
 
-    User addUser(RegisterRequest registerRequest){                  //tworzenie użytkownika przekazując jego parametry
-        User user =  new User();                                       // poprzez klase RegisterRequest i kodowanie hasła
-        user.setName(registerRequest.getName());
-        user.setPassword(encodePassword(registerRequest.getPassword()));
-        user.setEmail(registerRequest.getEmail());
+    User addUser(User user){
         return userRepository.save(user);
     }
 

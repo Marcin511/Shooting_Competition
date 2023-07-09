@@ -26,7 +26,7 @@ public class ResultController {
         return resultService.addResult(result);
     }
 
-    @GetMapping("/result/{id}/results") //pobieranie wyników po id użytkownika nie działa i nie wiem dlaczego
+    @GetMapping("/result/{User_id}") //pobieranie wyników po id użytkownika nie działa i nie wiem dlaczego
     public List<Result> showResults(@PathVariable Long id) {
         return resultService.getResultsByUserId(id);
     }

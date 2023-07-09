@@ -25,7 +25,7 @@ public class ResultService {
 
     public List<Result> getResultsByUserId(Long id) {
 
-        return (List<Result>) resultRepository.findResultByUserId(id).orElseThrow(()->new NoSuchElementException("element dont exist"));
+        return (List<Result>) resultRepository.findResultByUserId(id);
          }
 
     List<Result> getAllResults() {

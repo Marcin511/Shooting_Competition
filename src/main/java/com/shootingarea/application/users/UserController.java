@@ -17,15 +17,13 @@ public class UserController {
     @Autowired
     private final UserService userService;
 
-
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
     @PostMapping("/register")  // rejestracja urzytkowanika
-    public ResponseEntity register(@RequestBody RegisterRequest registerRequest){
-        userService.addUser(registerRequest);
-        return new ResponseEntity(HttpStatus.OK);
+    public User register(@RequestBody User user){
+        return userService.addUser(user);
     }
 
     @GetMapping("/users")
