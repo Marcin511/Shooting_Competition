@@ -9,7 +9,7 @@ import java.util.Objects;
 @Entity
 public class Result {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int numberOfShots;
     private int maxScore;

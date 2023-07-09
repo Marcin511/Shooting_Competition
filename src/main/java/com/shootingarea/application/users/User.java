@@ -11,13 +11,16 @@ import java.util.Objects;
 @Table(name = "Users")
 public class User {    //tworzenie encji użytkownika
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "User_id")
     private Long id;
     private String name;
     private String email;
     private String password;
-    @OneToMany(mappedBy = "user") // tworzenie zależności jeden użytkownik wiele rezultatów
+    private String role;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+
     private List<Result> results = new ArrayList<>();
 
     public List<Result> getResults() {
@@ -34,6 +37,7 @@ public class User {    //tworzenie encji użytkownika
     public Long getId() {
         return id;
     }
+
 
     public void setId(Long id) {
         this.id = id;
@@ -63,6 +67,14 @@ public class User {    //tworzenie encji użytkownika
         this.password = password;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+
+    }
 
     @Override
     public boolean equals(Object o) {
