@@ -52,14 +52,14 @@ public class UserService {
         userRepository.deleteById(id);
         return user;
     }
-    User updateUser(@PathVariable Long id, @RequestBody User userToUpdate) {
+    User updateUser( Long id, User userToUpdate) {
         //uodate użytkownika i sprawdzenie czy ok istnieje
-        return userRepository.findById(id).map(user->{
+        User user = userRepository.findById(id).orElseThrow(()->new NoSuchElementException("User isn,t exist"));
             user.setName(userToUpdate.getName());
             user.setEmail(userToUpdate.getEmail());
             user.setPassword(userToUpdate.getPassword());
             return userRepository.save(user);
-        }).orElseThrow(()->new NoSuchElementException("User isn,t exist"));
+        }
     }
 
-}
+

@@ -25,12 +25,18 @@ public class Result {
         return user;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
 
     public Result() {
+    }
+
+    public Result(Long id, int numberOfShots, int maxScore, int userScore, float accuracy, String gunType, User user) {
+        this.id = id;
+        this.numberOfShots = numberOfShots;
+        this.maxScore = maxScore;
+        this.userScore = userScore;
+        this.accuracy = accuracy;
+        this.gunType = gunType;
+        this.user = user;
     }
 
     public Long getId() {
@@ -38,7 +44,7 @@ public class Result {
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.id = this.id;
     }
 
     public int getNumberOfShots() {
