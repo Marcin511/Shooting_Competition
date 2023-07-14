@@ -9,22 +9,24 @@ import java.util.Objects;
 @Entity
 public class Result {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int numberOfShots;
     private int maxScore;
     private int userScore;
     private float accuracy;
     private String gunType;
-    @NotNull
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false) // utworzenie klucza obcego w tabeli user
+    @JoinColumn(name = "user_id", referencedColumnName = "id") // utworzenie klucza obcego w tabeli user
     private User user;
 
     public User getUser() {
         return user;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Result() {
     }

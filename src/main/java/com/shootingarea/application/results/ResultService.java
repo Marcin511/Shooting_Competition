@@ -4,7 +4,6 @@ import com.shootingarea.application.users.User;
 import com.shootingarea.application.users.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
 
 
 import java.util.ArrayList;
@@ -24,12 +23,10 @@ public class ResultService {
     }
 
      Result addResult(Result result){
-        User userFromRepo = userRepository.findUserById(result.getUser().getId()).orElseThrow(()-> new NoSuchElementException("User not exist"));
         return resultRepository.save(result);
     }
 
     public List<Result> getResultsByUserId(Long id) {
-
         return (List<Result>) resultRepository.findResultByUserId(id);
          }
 

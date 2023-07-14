@@ -1,6 +1,7 @@
 package com.shootingarea.application.users;
 
 import com.shootingarea.application.results.Result;
+import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -11,8 +12,8 @@ import java.util.Objects;
 @Table(name = "Users")
 public class User {    //tworzenie encji użytkownika
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
     private Long id;
     private String name;
     private String email;
@@ -30,6 +31,15 @@ public class User {    //tworzenie encji użytkownika
     }
 
     public User() {
+    }
+
+    public User(Long id, String name, String email, String password, String role, List<Result> results) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.results = results;
     }
 
     public Long getId() {
