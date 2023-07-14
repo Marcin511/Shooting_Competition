@@ -18,7 +18,7 @@ public class Result {
     private String gunType;
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "user_id") // utworzenie klucza obcego w tabeli user
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false) // utworzenie klucza obcego w tabeli user
     private User user;
 
     public User getUser() {
